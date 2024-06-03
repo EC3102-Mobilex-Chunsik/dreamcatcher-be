@@ -28,7 +28,7 @@ python = ">=3.12,<3.13"
 python-dotenv = { version = "*" }
 psycopg2-binary = "*"
 sqlalchemy = "*"
-openai = "1.30.5"  
+openai = "0.28.1"  
 
 
 [build-system]
