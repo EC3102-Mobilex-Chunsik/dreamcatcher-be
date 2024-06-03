@@ -30,4 +30,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: crown31/mobilex-dreamcatcher-frontend:${{ steps.extract_version.outputs.VERSION }}
+          tags: shg0592/mobilex-dreamcatcher-backend:${{ steps.extract_version.outputs.VERSION }}
