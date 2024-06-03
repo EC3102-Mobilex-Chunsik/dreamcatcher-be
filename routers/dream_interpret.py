@@ -48,7 +48,7 @@ def interpret_dream(input_data: InputModel) -> OutputModel:
     if input_data.llm_type == 'chatgpt':
         # OpenAI API를 사용하여 GPT-4 모델 호출
         response = openai.ChatCompletion.create(
-            model="gpt-3.5",
+            model="gpt-4",
             messages=[
                 {"role": "system", "content": "You are a dream interpreter."},
                 {"role": "system", "content": dream_prompt},
