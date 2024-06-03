@@ -1,0 +1,42 @@
+[tool.poetry]
+name = "mobilex-exp-backend"
+version = "0.1.0"
+description = "MobileX Experience Lab Project - Backend"
+authors = ["Sangyu Lee <me@sangyul.ee>", "Ho Kim <ho.kim@smartx.kr>"]
+readme = "README.md"
+repository = "https://github.com/HoKim98/mobilex-exp/tree/main/Backend"
+include = ["./prompts/*.txt"]
+
+[[tool.poetry.packages]]
+include = "./llm/**/*.py"
+
+[[tool.poetry.packages]]
+include = "./models/**/*.py"
+
+[[tool.poetry.packages]]
+include = "./routers/**/*.py"
+
+[[tool.poetry.packages]]
+include = "./0_Home.py"
+
+[tool.poetry.dependencies]
+fastapi = "*"
+gunicorn = "*"
+json-repair = { version = "*" }
+langchain = { version = "*" }
+langchain-chroma = { version = "*" }
+langchain-experimental = { version = "*" }
+langchain-community = { version = "*" }
+langchain-openai = { version = "*" }
+langchainhub = { version = "*" }
+neo4j = { version = "*" }
+python = ">=3.12,<3.13"
+python-dotenv = { version = "*" }
+psycopg2-binary = "*"
+sqlalchemy = "*"
+openai = "*"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
