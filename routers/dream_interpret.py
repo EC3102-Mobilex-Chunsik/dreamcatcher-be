@@ -1,24 +1,34 @@
-from typing import Literal, List
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
+from typing import List, Literal
 import openai
+import os
+import logging
 
-# OpenAI API 키 설정 (환경 변수로 설정하는 것이 더 안전합니다)
-openai.api_key = 'api_key'
+# Configure API router
+router = APIRouter(
+    tags=['dreams'],
+)
 
+# 설정 로그
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-class FactorModel(BaseModel):
-    tagName: str
-    description: str
+# OpenAI API 키 설정 (환경 변수에서 읽어오기)
+openai.api_key = os.getenv('OPENAI_API_KEY', 'your_openai_api_key')
+if not openai.api_key:
+    logger.error("OPENAI_API_KEY 환경 변수가 설정되지 않았습니다.")
+    raise ValueError("OPENAI_API_KEY 환경 변수가 설정되지 않았습니다.")
+else:
+    logger.info(f"OPENAI_API_KEY 설정됨: {openai.api_key}")
 
 
 class InputModel(BaseModel):
     dream_description: str = Field(
         description='사용자가 묘사하는 꿈의 내용',
-        default='어젯밤에 나는 하늘을 나는 꿈을 꾸었어',
+        default='어젯밤에 나는 하늘을 나는 꿈을 꾸었어..',
     )
-
     llm_type: Literal['chatgpt', 'huggingface'] = Field(
-        alias='Large Language Model Type',
         description='사용할 LLM 종류',
         default='chatgpt',
     )
@@ -52,18 +62,7 @@ def interpret_dream(input_data: InputModel) -> OutputModel:
     return OutputModel(interpretation=interpretation)
 
 
-def main():
-    # 예제 사용자 입력
-    user_input = {
-        "dream_description": "어젯밤에 나는 하늘을 나는 꿈을 꾸었어",
-        "llm_type": "chatgpt"
-    }
-
-    input_data = InputModel(**user_input)
-    output_data = interpret_dream(input_data)
-
-    print("꿈 해석 결과:", output_data.interpretation)
-
-
-if __name__ == "__main__":
-    main()
+# 새로운 꿈 해석 엔드포인트
+@router.post("/interpret", response_model=OutputModel)
+def interpret_dream_endpoint(input_data: InputModel):
+    return interpret_dream(input_data)
