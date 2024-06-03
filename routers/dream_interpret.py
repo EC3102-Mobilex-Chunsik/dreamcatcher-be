@@ -26,7 +26,7 @@ else:
 class InputModel(BaseModel):
     dream_description: str = Field(
         description='사용자가 묘사하는 꿈의 내용',
-        default='어젯밤에 나는 하늘을 나는 꿈을 꾸었어',
+        default='어젯밤에 나는 하늘을 나는 꿈을 꾸었어..',
     )
     llm_type: Literal['chatgpt', 'huggingface'] = Field(
         description='사용할 LLM 종류',
@@ -46,7 +46,7 @@ def interpret_dream(input_data: InputModel) -> OutputModel:
             logger.info(f"꿈 해석 요청: {input_data.dream_description}")
             # OpenAI API를 사용하여 GPT-4 모델 호출
             response = openai.ChatCompletion.create(
-                model="gpt-4",
+                model="gpt-3.5-turbo",
                 messages=[
                     {"role": "system", "content": "You are a dream interpreter."},
                     {"role": "user", "content": f"다음 꿈을 해석해줘: {input_data.dream_description}"}

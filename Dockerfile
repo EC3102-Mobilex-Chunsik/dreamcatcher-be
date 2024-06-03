@@ -24,6 +24,8 @@ COPY pyproject.toml ./
 # Install package dependencies
 RUN --mount=type=cache,target=${POETRY_CACHE_DIR} \
     poetry install --no-root --without dev
+# openai migrate 명령을 실행하여 코드베이스를 새로운 openai API로 마이그레이션
+# RUN openai migrate
 
 # --- runtime ----
 FROM "docker.io/library/python:${PYTHON_VERSION}-slim-${PYTHON_DIST}" as runtime

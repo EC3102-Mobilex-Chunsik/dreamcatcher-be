@@ -23,18 +23,12 @@ include = "./0_Home.py"
 fastapi = "*"
 gunicorn = "*"
 json-repair = { version = "*" }
-langchain = { version = "*" }
-langchain-chroma = { version = "*" }
-langchain-experimental = { version = "*" }
-langchain-community = { version = "*" }
-langchain-openai = { version = "*" }
-langchainhub = { version = "*" }
 neo4j = { version = "*" }
 python = ">=3.12,<3.13"
 python-dotenv = { version = "*" }
 psycopg2-binary = "*"
 sqlalchemy = "*"
-openai = "*"
+openai = "1.30.5"  
 
 
 [build-system]
