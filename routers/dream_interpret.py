@@ -42,7 +42,7 @@ class OutputModel(BaseModel):
 
 def interpret_dream(input_data: InputModel) -> OutputModel:
     # dream.txt 파일의 내용을 읽어옵니다.
-    with open('../prompts/dream.txt', 'r', encoding='utf-8') as file:
+    with open(r'../prompts/dream.txt', 'r', encoding='utf-8') as file:
         dream_prompt = file.read()
 
     if input_data.llm_type == 'chatgpt':
